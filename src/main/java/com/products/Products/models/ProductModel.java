@@ -27,7 +27,7 @@ public class ProductModel {
 
     @Column(name = "type_product")
     @Enumerated(EnumType.STRING)
-    TypeProduct typeProductEnum;
+    TypeProduct typeProduct;
 
     @Column
     String description;
