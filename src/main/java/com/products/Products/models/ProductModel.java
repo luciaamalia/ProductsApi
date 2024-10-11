@@ -7,6 +7,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.math.BigDecimal;
 import java.util.UUID;
 @NoArgsConstructor
 @AllArgsConstructor
@@ -32,5 +33,5 @@ public class ProductModel {
     String description;
 
     @Column
-    Number price;
+    BigDecimal price;
 }
