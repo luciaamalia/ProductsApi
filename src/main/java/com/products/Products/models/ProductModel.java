@@ -34,4 +34,5 @@ public class ProductModel {
 
     @Column
     BigDecimal price;
+
 }

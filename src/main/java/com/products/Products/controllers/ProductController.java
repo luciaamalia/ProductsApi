@@ -2,7 +2,6 @@ package com.products.Products.controllers;
 
 import com.products.Products.models.ProductModel;
 import com.products.Products.services.ProductService;
-import org.apache.coyote.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -50,6 +49,26 @@ public class ProductController {
             productService.deleteProductById(idProduct);
             return ResponseEntity.status(HttpStatus.NO_CONTENT).body("");
         }else {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Erro: Product Not Found");
+        }
+    }
+
+    @PutMapping("/{idProduct}")
+    public ResponseEntity<Object> updateProduct(@PathVariable UUID idProduct, @RequestBody ProductModel dataRequest){
+        Optional<ProductModel> product = productService.listProductById(idProduct);
+        if(product.isPresent()){
+
+            ProductModel productUpdate = product.get();
+
+            productUpdate.setName(dataRequest.getName());
+            productUpdate.setPrice(dataRequest.getPrice());
+            productUpdate.setDescription(dataRequest.getDescription());
+            productUpdate.setTypeProduct(dataRequest.getTypeProduct());
+
+
+            productService.updateProduct(productUpdate);
+            return new ResponseEntity<>(productUpdate, HttpStatus.OK);
+        }else{
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Erro: Product Not Found");
         }
     }
