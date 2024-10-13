@@ -1,5 +1,7 @@
 package com.products.Products.services.interfaces;
 
+import com.products.Products.dtos.RequestProductDTO;
+import com.products.Products.dtos.ResponseProductDTO;
 import com.products.Products.models.ProductModel;
 
 import java.util.List;
@@ -8,13 +10,13 @@ import java.util.UUID;
 
 public interface ProductInterface {
 
-    void createProduct(ProductModel product);
+    void createProduct(RequestProductDTO product);
 
-    List<ProductModel> getAllProducts();
+    List<ResponseProductDTO> getAllProducts();
 
-    Optional<ProductModel> getProductById(UUID idProduct);
+    Optional<ResponseProductDTO> getProductById(UUID idProduct);
 
      void deleteProductById (UUID idProduct);
 
-     void updateProduct(ProductModel product);
+     void updateProduct(RequestProductDTO requestProductDTO, ProductModel product);
 }

@@ -1,5 +1,7 @@
 package com.products.Products.controllers;
 
+import com.products.Products.dtos.RequestProductDTO;
+import com.products.Products.dtos.ResponseProductDTO;
 import com.products.Products.models.ProductModel;
 import com.products.Products.services.ProductServiceImplementation;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,20 +21,20 @@ public class ProductController {
     private ProductServiceImplementation productServiceImplementation;
 
     @PostMapping
-    public ResponseEntity<ProductModel> cadastroProduto(@RequestBody ProductModel product){
+    public ResponseEntity<RequestProductDTO> cadastroProduto(@RequestBody RequestProductDTO product){
         productServiceImplementation.createProduct(product);
-        return new ResponseEntity<>(product, HttpStatus.CREATED);
+        return ResponseEntity.status(HttpStatus.CREATED).body(product);
     }
 
     @GetMapping
-    public ResponseEntity<List<ProductModel>> listarProdutos(){
-        List<ProductModel> product = productServiceImplementation.getAllProducts();
+    public ResponseEntity<List<ResponseProductDTO>> listarProdutos(){
+        List<ResponseProductDTO> product = productServiceImplementation.getAllProducts();
         return ResponseEntity.ok(product);
 
     }
     @GetMapping("/{idProduct}")
     public ResponseEntity<Object>listProductById(@PathVariable UUID idProduct){
-        Optional<ProductModel> product = productServiceImplementation.getProductById(idProduct);
+        Optional<ResponseProductDTO> product = productServiceImplementation.getProductById(idProduct);
 
         if (product.isPresent()) {
             return ResponseEntity.status(HttpStatus.OK).body(product);
@@ -43,7 +45,7 @@ public class ProductController {
 
     @DeleteMapping("/{idProduct}")
     public ResponseEntity<Object> deleteProductById(@PathVariable UUID idProduct){
-        Optional<ProductModel> product = productServiceImplementation.getProductById(idProduct);
+        Optional<ResponseProductDTO> product = productServiceImplementation.getProductById(idProduct);
 
         if(product.isPresent()){
             productServiceImplementation.deleteProductById(idProduct);
@@ -54,11 +56,11 @@ public class ProductController {
     }
 
     @PutMapping("/{idProduct}")
-    public ResponseEntity<Object> updateProduct(@PathVariable UUID idProduct, @RequestBody ProductModel dataRequest){
-        Optional<ProductModel> product = productServiceImplementation.getProductById(idProduct);
+    public ResponseEntity<Object> updateProduct(@PathVariable UUID idProduct, @RequestBody RequestProductDTO dataRequest){
+        Optional<ResponseProductDTO> product = productServiceImplementation.getProductById(idProduct);
         if(product.isPresent()){
 
-            ProductModel productUpdate = product.get();
+            ResponseProductDTO productUpdate = product.get();
 
             productUpdate.setName(dataRequest.getName());
             productUpdate.setPrice(dataRequest.getPrice());
@@ -66,7 +68,7 @@ public class ProductController {
             productUpdate.setTypeProduct(dataRequest.getTypeProduct());
 
 
-            productServiceImplementation.updateProduct(productUpdate);
+          //  productServiceImplementation.updateProduct(productUpdate);
             return new ResponseEntity<>(productUpdate, HttpStatus.OK);
         }else{
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Erro: Product Not Found");
