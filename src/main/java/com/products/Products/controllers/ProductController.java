@@ -2,7 +2,6 @@ package com.products.Products.controllers;
 
 import com.products.Products.dtos.RequestProductDTO;
 import com.products.Products.dtos.ResponseProductDTO;
-import com.products.Products.models.ProductModel;
 import com.products.Products.services.ProductServiceImplementation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

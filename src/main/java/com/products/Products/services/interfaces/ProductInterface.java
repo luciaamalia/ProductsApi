@@ -16,7 +16,7 @@ public interface ProductInterface {
 
     Optional<ResponseProductDTO> getProductById(UUID idProduct);
 
-     void deleteProductById (UUID idProduct);
+    void deleteProductById (UUID idProduct);
 
-     void updateProduct(RequestProductDTO requestProductDTO, ProductModel product);
+    void updateProduct(RequestProductDTO requestProductDTO, ProductModel product);
 }
