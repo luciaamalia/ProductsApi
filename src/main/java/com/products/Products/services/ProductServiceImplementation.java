@@ -21,6 +21,7 @@ public class ProductServiceImplementation implements ProductInterface {
 
    @Override
    public void createProduct(RequestProductDTO requestProductDTO){
+
        ProductModel productModel = new ProductModel();
        BeanUtils.copyProperties(requestProductDTO, productModel);
        productRepository.save(productModel);
@@ -57,8 +58,7 @@ public class ProductServiceImplementation implements ProductInterface {
 
     @Override
     public void updateProduct(RequestProductDTO requestProductDTO, ProductModel product) {
-        ProductModel productModel = new ProductModel();
         BeanUtils.copyProperties(requestProductDTO, product);
-        productRepository.save(productModel);
+        productRepository.save(product);
     }
 }

@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.math.BigDecimal;
+import java.util.Date;
 import java.util.UUID;
 @NoArgsConstructor
 @AllArgsConstructor
@@ -34,5 +35,24 @@ public class ProductModel {
 
     @Column
     BigDecimal price;
+
+    @Temporal(TemporalType.TIMESTAMP)
+    @Column(updatable = false)
+    Date dateCreation;
+
+    @Temporal(TemporalType.TIMESTAMP)
+    @Column
+    Date dateUpdate;
+
+    @PrePersist
+    protected void onCreate() {
+        dateCreation = new Date();
+        dateUpdate = new Date();
+    }
+
+    @PreUpdate
+    protected void onUpdate() {
+        dateUpdate = new Date();
+    }
 
 }
