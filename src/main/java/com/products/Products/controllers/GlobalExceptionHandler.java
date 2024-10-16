@@ -7,35 +7,35 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
 @ControllerAdvice //a classe captura exceptions em tdo projeto
-public class GlobalExceptionHandler {
+public class GlobalExceptionHandler extends ProductExceptions {
 
-    @ExceptionHandler(ProductExceptions.ProductAlreadyExistsException.class)
-    public ResponseEntity<String> handleProductAlreadyExists(ProductExceptions.ProductAlreadyExistsException ex) {
-        return ResponseEntity.status(HttpStatus.CONFLICT).body(ex.getMessage());
+    @ExceptionHandler(ProductAlreadyExistsException.class)
+    public ResponseEntity<String> handleProductAlreadyExists(ProductAlreadyExistsException ex) {
+        return new ResponseEntity<>(ex.getMessage(), HttpStatus.CONFLICT);
     }
 
-    @ExceptionHandler(ProductExceptions.InvalidIdFormatException.class)
-    public ResponseEntity<String> handleInvalidIdFormat(ProductExceptions.InvalidIdFormatException ex) {
+    @ExceptionHandler(InvalidIdFormatException.class)
+    public ResponseEntity<String> handleInvalidIdFormat(InvalidIdFormatException ex) {
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(ex.getMessage());
     }
 
-    @ExceptionHandler(ProductExceptions.ProductNotFoundException.class)
-    public ResponseEntity<String> handleProductNotFound(ProductExceptions.ProductNotFoundException ex) {
+    @ExceptionHandler(ProductNotFoundException.class)
+    public ResponseEntity<String> handleProductNotFound(ProductNotFoundException ex) {
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(ex.getMessage());
     }
 
-    @ExceptionHandler(ProductExceptions.InvalidFieldFormatException.class)
-    public ResponseEntity<String> handleInvalidFieldFormat(ProductExceptions.InvalidFieldFormatException ex) {
+    @ExceptionHandler(InvalidFieldFormatException.class)
+    public ResponseEntity<String> handleInvalidFieldFormat(InvalidFieldFormatException ex) {
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(ex.getMessage());
     }
 
-    @ExceptionHandler(ProductExceptions.InvalidDataFormatException.class)
-    public ResponseEntity<String> handleInvalidDataFormat(ProductExceptions.InvalidDataFormatException ex) {
+    @ExceptionHandler(InvalidDataFormatException.class)
+    public ResponseEntity<String> handleInvalidDataFormat(InvalidDataFormatException ex) {
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(ex.getMessage());
     }
 
-    @ExceptionHandler(ProductExceptions.RequiredFieldMissingException.class)
-    public ResponseEntity<String> handleRequiredFieldMissing(ProductExceptions.RequiredFieldMissingException ex) {
+    @ExceptionHandler(RequiredFieldMissingException.class)
+    public ResponseEntity<String> handleRequiredFieldMissing(RequiredFieldMissingException ex) {
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(ex.getMessage());
     }
 }

@@ -5,6 +5,7 @@ import com.products.Products.dtos.ResponseProductDTO;
 import com.products.Products.models.ProductModel;
 import com.products.Products.repositories.ProductRepository;
 import com.products.Products.services.interfaces.ProductInterface;
+import com.products.Products.validations.ProductValidations;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -19,9 +20,15 @@ public class ProductServiceImplementation implements ProductInterface {
     @Autowired
     private ProductRepository productRepository;
 
+    @Autowired
+    private ProductValidations productValidations;
+
    @Override
    public void createProduct(RequestProductDTO requestProductDTO){
 
+       // Verifica se o nome do produto já existe
+       productValidations.validateProductName(requestProductDTO.getName());
+       
        ProductModel productModel = new ProductModel();
        BeanUtils.copyProperties(requestProductDTO, productModel);
        productRepository.save(productModel);
