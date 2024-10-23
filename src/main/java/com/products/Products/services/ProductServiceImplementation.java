@@ -28,7 +28,7 @@ public class ProductServiceImplementation implements ProductInterface {
 
        // Verifica se o nome do produto já existe
        productValidations.validateProductName(requestProductDTO.getName());
-       
+
        ProductModel productModel = new ProductModel();
        BeanUtils.copyProperties(requestProductDTO, productModel);
        productRepository.save(productModel);
@@ -51,6 +51,7 @@ public class ProductServiceImplementation implements ProductInterface {
 
     @Override
     public Optional<ResponseProductDTO> getProductById (UUID idProduct){
+        productValidations.validateIdFormat(idProduct);
         return productRepository.findById(idProduct)
                 .map(productModel -> {
                     ResponseProductDTO responseProductDTO = new ResponseProductDTO();

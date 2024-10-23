@@ -16,7 +16,7 @@ public class GlobalExceptionHandler extends ProductExceptions {
 
     @ExceptionHandler(InvalidIdFormatException.class)
     public ResponseEntity<String> handleInvalidIdFormat(InvalidIdFormatException ex) {
-        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(ex.getMessage());
+        return new ResponseEntity<>(ex.getMessage(), HttpStatus.CONFLICT);
     }
 
     @ExceptionHandler(ProductNotFoundException.class)

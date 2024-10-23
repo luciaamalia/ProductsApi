@@ -4,6 +4,7 @@ import com.products.Products.dtos.RequestProductDTO;
 import com.products.Products.dtos.ResponseProductDTO;
 import com.products.Products.models.ProductModel;
 import com.products.Products.services.ProductServiceImplementation;
+import jakarta.validation.Valid;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -22,7 +23,7 @@ public class ProductController {
     private ProductServiceImplementation productServiceImplementation;
 
     @PostMapping
-    public ResponseEntity<RequestProductDTO> cadastroProduto(@RequestBody RequestProductDTO product){
+    public ResponseEntity<RequestProductDTO> cadastroProduto(@Valid @RequestBody RequestProductDTO product){
         productServiceImplementation.createProduct(product);
         return ResponseEntity.status(HttpStatus.CREATED).body(product);
     }
@@ -57,7 +58,7 @@ public class ProductController {
     }
 
     @PutMapping("/{idProduct}")
-    public ResponseEntity<Object> updateProduct(@PathVariable UUID idProduct, @RequestBody RequestProductDTO dataRequest) {
+    public ResponseEntity<Object> updateProduct(@PathVariable UUID idProduct, @Valid @RequestBody RequestProductDTO dataRequest) {
         Optional<ResponseProductDTO> productOptional = productServiceImplementation.getProductById(idProduct);
         if(productOptional.isPresent()) {
             ResponseProductDTO productDTO = productOptional.get();
