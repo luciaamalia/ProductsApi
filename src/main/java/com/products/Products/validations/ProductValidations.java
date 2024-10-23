@@ -35,6 +35,24 @@ public class ProductValidations extends ProductExceptions{
         if (requestProductDTO == null) {
             throw new InvalidFieldFormatException("corpo da requisição");
         }
-
     }
+
+//    public void validateProductFields(RequestProductDTO requestProductDTO) {
+//        // Validação do campo name (se necessário)
+//        if (requestProductDTO.getName() == null) {
+//            throw new ProductExceptions.RequiredFieldMissingException("name");
+//        }
+//
+//        // Validação do campo typeProduct (se necessário)
+//        if (requestProductDTO.getTypeProduct() == null) {
+//            throw new ProductExceptions.RequiredFieldMissingException("typeProduct");
+//        }
+//
+//        // Validação do campo price
+//        if (requestProductDTO.getPrice() == null) {
+//            throw new ProductExceptions.RequiredFieldMissingException("price");
+//        }
+
+//    }   }
+
 }

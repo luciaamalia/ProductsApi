@@ -32,7 +32,7 @@ public class ProductExceptions {
         }
     }
 
-    public class RequiredFieldMissingException extends RuntimeException {
+    public static class RequiredFieldMissingException extends RuntimeException {
         public RequiredFieldMissingException(String fieldName) {
             super("O campo " + fieldName + " é obrigatório");
         }

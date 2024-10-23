@@ -3,6 +3,7 @@ package com.products.Products.controllers;
 import com.products.Products.exceptions.ProductExceptions;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
@@ -37,5 +38,9 @@ public class GlobalExceptionHandler extends ProductExceptions {
     @ExceptionHandler(RequiredFieldMissingException.class)
     public ResponseEntity<String> handleRequiredFieldMissing(RequiredFieldMissingException ex) {
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(ex.getMessage());
+    }
+    @ExceptionHandler(HttpMessageNotReadableException.class)
+    public ResponseEntity<String> handleEnumInvalid(HttpMessageNotReadableException ex) {
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("O valor de typeProduct é inválido. Valores permitidos: FOOD, ELECTRONICS, CLOTHING");
     }
 }
