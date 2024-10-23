@@ -41,6 +41,6 @@ public class GlobalExceptionHandler extends ProductExceptions {
     }
     @ExceptionHandler(HttpMessageNotReadableException.class)
     public ResponseEntity<String> handleEnumInvalid(HttpMessageNotReadableException ex) {
-        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("O valor de typeProduct é inválido. Valores permitidos: FOOD, ELECTRONICS, CLOTHING");
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("O valor de typeProduct é inválido. Valores permitidos: ELECTRONICS, CLOTHING, FOOD, TOYS, BOOKS,COSMETICS");
     }
 }

@@ -33,15 +33,15 @@ public class ProductServiceImplementation implements ProductInterface {
            throw new ProductExceptions.RequiredFieldMissingException("name");
        }
 
-       // Validação do campo typeProduct (se necessário)
-       if (requestProductDTO.getTypeProduct() == null) {
-           throw new ProductExceptions.RequiredFieldMissingException("typeProduct");
-       }
+//       // Validação do campo typeProduct (se necessário)
+//       if (requestProductDTO.getTypeProduct() == null) {
+//           throw new ProductExceptions.RequiredFieldMissingException("typeProduct");
+//       }
 
        // Validação do campo price
-       if (requestProductDTO.getPrice() == null) {
-           throw new ProductExceptions.RequiredFieldMissingException("price");
-       }
+//       if (requestProductDTO.getPrice() == null) {
+//           throw new ProductExceptions.RequiredFieldMissingException("price");
+//       }
        ProductModel productModel = new ProductModel();
        BeanUtils.copyProperties(requestProductDTO, productModel);
        productRepository.save(productModel);
