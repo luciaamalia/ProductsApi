@@ -7,7 +7,6 @@ import com.products.Products.exceptions.ProductNotFoundException;
 import com.products.Products.models.ProductModel;
 import com.products.Products.repositories.ProductRepository;
 import com.products.Products.services.interfaces.ProductInterface;
-import com.products.Products.validations.ProductValidations;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
