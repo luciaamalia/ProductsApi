@@ -23,56 +23,43 @@ public class ProductController {
     private ProductServiceImplementation productServiceImplementation;
 
     @PostMapping
-    public ResponseEntity<RequestProductDTO> cadastroProduto(@Valid @RequestBody RequestProductDTO product){
-        productServiceImplementation.createProduct(product);
-        return ResponseEntity.status(HttpStatus.CREATED).body(product);
+    public ResponseEntity<RequestProductDTO> registerProduct(@Valid @RequestBody RequestProductDTO productDTO){
+        productServiceImplementation.createProduct(productDTO);
+        return ResponseEntity.status(HttpStatus.CREATED).body(productDTO);
     }
 
     @GetMapping
-    public ResponseEntity<List<ResponseProductDTO>> listarProdutos(){
-        List<ResponseProductDTO> product = productServiceImplementation.getAllProducts();
-        return ResponseEntity.ok(product);
+    public ResponseEntity<List<ResponseProductDTO>> ListAllProducts(){
+        List<ResponseProductDTO> products = productServiceImplementation.getAllProducts();
+        return ResponseEntity.ok(products);
 
     }
-    @GetMapping("/{idProduct}")
-    public ResponseEntity<Object>listProductById(@PathVariable UUID idProduct){
-        Optional<ResponseProductDTO> product = productServiceImplementation.getProductById(idProduct);
 
-        if (product.isPresent()) {
-            return ResponseEntity.status(HttpStatus.OK).body(product);
-        }else {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Erro: Product Not Found");
-        }
+    @GetMapping("/{idProduct}")
+    public ResponseEntity<ResponseProductDTO> listProductById(@PathVariable UUID idProduct) {
+        ResponseProductDTO product = productServiceImplementation.getProductById(idProduct);
+        return ResponseEntity.ok(product);
     }
 
     @DeleteMapping("/{idProduct}")
-    public ResponseEntity<Object> deleteProductById(@PathVariable UUID idProduct){
-        Optional<ResponseProductDTO> product = productServiceImplementation.getProductById(idProduct);
+    public ResponseEntity<Object> deleteProduct(@PathVariable UUID idProduct) {
 
-        if(product.isPresent()){
-            productServiceImplementation.deleteProductById(idProduct);
-            return ResponseEntity.status(HttpStatus.NO_CONTENT).body("");
-        }else {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Erro: Product Not Found");
-        }
+        productServiceImplementation.getProductById(idProduct);
+        productServiceImplementation.deleteProductById(idProduct);
+
+        return ResponseEntity.status(HttpStatus.NO_CONTENT).body("");
     }
 
     @PutMapping("/{idProduct}")
-    public ResponseEntity<Object> updateProduct(@PathVariable UUID idProduct, @Valid @RequestBody RequestProductDTO dataRequest) {
-        Optional<ResponseProductDTO> productOptional = productServiceImplementation.getProductById(idProduct);
-        if(productOptional.isPresent()) {
-            ResponseProductDTO productDTO = productOptional.get();
+    public ResponseEntity<Object> updateProduct(@PathVariable UUID idProduct, @Valid @RequestBody RequestProductDTO dataRequestDTO) {
 
-            // Converta o ResponseProductDTO de volta para ProductModel
-            ProductModel productModel = new ProductModel();
-            BeanUtils.copyProperties(productDTO, productModel);
+        ResponseProductDTO productDTO = productServiceImplementation.getProductById(idProduct);
 
-            // Atualiza o produto com os dados do RequestProductDTO
-            productServiceImplementation.updateProduct(dataRequest, productModel);
+        ProductModel productModel = new ProductModel();
+        BeanUtils.copyProperties(productDTO, productModel);
 
-            return new ResponseEntity<>(productModel, HttpStatus.OK);
-        } else {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Erro: Product Not Found");
-        }
+        productServiceImplementation.updateProduct(dataRequestDTO, productModel);
+
+        return new ResponseEntity<>(productModel, HttpStatus.OK);
     }
 }

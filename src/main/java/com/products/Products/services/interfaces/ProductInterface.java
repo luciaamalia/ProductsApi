@@ -14,7 +14,7 @@ public interface ProductInterface {
 
     List<ResponseProductDTO> getAllProducts();
 
-    Optional<ResponseProductDTO> getProductById(UUID idProduct);
+    ResponseProductDTO getProductById(UUID idProduct);
 
     void deleteProductById (UUID idProduct);
 
