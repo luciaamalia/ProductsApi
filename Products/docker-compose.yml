@@ -5,9 +5,9 @@ services:
     image: mysql:8.0     # Imagem MySQL versão 8.0
     container_name: mysql_container
     environment:
-      MYSQL_ROOT_PASSWORD: teste    # Defina a senha do root
+      MYSQL_ROOT_PASSWORD: root123    # Defina a senha do root
       MYSQL_DATABASE: product_banco2     # Nome do banco de dados que será criado automaticamente
-      MYSQL_USER: teste                # Nome de um usuário adicional
+      MYSQL_USER:  amalia               # Nome de um usuário adicional
       MYSQL_PASSWORD: root123         # Senha do usuário adicional
     ports:
       - "3307:3306"                   # Expõe a porta 3306
