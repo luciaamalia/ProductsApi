@@ -1,0 +1,28 @@
+/.mvn/
+/.gradle/
+
+# Diretórios de build
+/target/
+/build/
+
+# Configurações do Eclipse e IntelliJ
+/.settings/
+/.classpath
+/.project
+/.idea/
+/*.iml
+
+# Logs e arquivos temporários
+*.log
+*.tmp
+*.bak
+*.old
+
+# Arquivos sensíveis
+application-*.yml
+application-*.properties
+.env
+
+# Configurações Maven e Gradle
+/.mvn/
+/.gradle/
