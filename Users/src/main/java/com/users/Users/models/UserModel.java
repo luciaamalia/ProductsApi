@@ -2,6 +2,7 @@ package com.users.Users.models;
 
 import com.users.Users.enums.TypeUserEnum;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Email;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -26,6 +27,7 @@ public class UserModel {
     private String nome;
 
     @Column
+    @Email
     private String email;
 
     @Column(name = "type_user")

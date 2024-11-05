@@ -5,11 +5,14 @@ import com.users.Users.models.UserModel;
 import com.users.Users.repositories.UserRepository;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
+@Service
 public class UserServiceImplementation {
 
     @Autowired
     private UserRepository userRepository;
+
 
     public void registerUser(RequestUserDTO requestUserDTO) {
 
