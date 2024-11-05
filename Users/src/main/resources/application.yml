@@ -9,12 +9,12 @@ spring:
         dialect: org.hibernate.dialect.PostgreSQLDialect
 
   datasource:
-    url: jdbc:postgresql://localhost:5432/banco_users
-    username: teste
+    url: jdbc:postgresql://localhost:5434/banco_users
+    username: pedra
     password: root123
     driver-class-name: org.postgresql.Driver
 
-  # Configurações do Flyway (opcional)
+  # Configuraï¿½ï¿½es do Flyway (opcional)
   # flyway:
   #   enabled: true
   #   baseline-on-migrate: true

@@ -1,6 +1,6 @@
 package com.users.Users.models;
 
-import com.users.Users.enums.TypeUser;
+import com.users.Users.enums.TypeUserEnum;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -30,6 +30,6 @@ public class UserModel {
 
     @Column(name = "type_user")
     @Enumerated(EnumType.STRING)
-    private TypeUser typeUser;
+    private TypeUserEnum typeUser;
 
 }
