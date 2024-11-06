@@ -55,6 +55,4 @@ public class ProductModel {
         dateUpdate = new Date();
     }
 
-
-
 }

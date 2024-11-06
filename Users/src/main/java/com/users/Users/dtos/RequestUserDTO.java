@@ -14,10 +14,18 @@ public class RequestUserDTO {
     @NotBlank(message = "O nome é obrigatório")
     private String name;
 
-    @NotBlank(message = "O email é obrigatório")
+    @NotBlank(message = "O email não pode estar vazio")
     @Email(message = "O e-mail deve ser válido.")
     private String email;
 
     @NotNull(message =  "O tipo de usuário é obrigatório" )
     private TypeUserEnum typeUser;
+
+    @NotBlank(message = "O telefone não pode estar vazio")
+    private String phone;
+
+    @NotBlank(message = "O email é obrigatório")
+    private String password;
+
+    //add um telefone aqui
 }

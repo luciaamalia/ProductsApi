@@ -4,21 +4,26 @@ import com.users.Users.dtos.RequestUserDTO;
 import com.users.Users.dtos.ResponseUserDTO;
 import com.users.Users.models.UserModel;
 import com.users.Users.repositories.UserRepository;
+import com.users.Users.services.interfaces.UserInterface;
 import org.apache.catalina.User;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.util.Date;
 import java.util.List;
+import java.util.UUID;
 import java.util.stream.Collectors;
 
 @Service
-public class UserServiceImplementation {
+public class UserServiceImplementation implements UserInterface {
 
     @Autowired
     private UserRepository userRepository;
 
-
+    @Override
     public void registerUser(RequestUserDTO requestUserDTO) {
 
         UserModel userModel = new UserModel();
@@ -27,6 +32,7 @@ public class UserServiceImplementation {
         userRepository.save(userModel);
     }
 
+    @Override
     public List<ResponseUserDTO> getAllUsers(){
         List<UserModel> users = userRepository.findAll();
 
@@ -38,4 +44,33 @@ public class UserServiceImplementation {
                 })
                 .collect(Collectors.toList());
     }
+
+    @Override
+    public ResponseUserDTO getUserById(UUID idUser) {
+        if (!userRepository.existsById(idUser)){
+           // throw new UserNotFoundException();
+        }
+        return userRepository.findById(idUser)
+                .map(users -> {
+                    ResponseUserDTO responseUserDTO = new ResponseUserDTO();
+                    BeanUtils.copyProperties(users, responseUserDTO);
+                    return responseUserDTO;
+                })
+                .orElseThrow();
+    }
+
+    @Override
+    public void deleteUserById(UUID idUser) {
+        userRepository.deleteById(idUser);
+    }
+
+    @Override
+    public void updateUser(RequestUserDTO requestUserDTO, UserModel userModel) {
+
+        BeanUtils.copyProperties(requestUserDTO, userModel);
+        userModel.setDateUpdate(Date.from(LocalDateTime.now().atZone(ZoneId.systemDefault()).toInstant()));
+
+        userRepository.save(userModel);
+    }
+
 }
