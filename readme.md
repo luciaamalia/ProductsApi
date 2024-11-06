@@ -34,3 +34,36 @@ O projeto utiliza **Docker** para a containerização, facilitando a execução 
 
 ## Desenho de Arquitetura:
 
+
+--Docker--
+
+# Subir uma nova máquina com os bancos de dados configurados no docker-compose.yml
+docker compose up
+
+# Matar um container específico
+docker kill id-container
+
+# Excluir resquícios de containers, volumes e redes parados
+docker system prune --volumes
+
+# Verificar o status dos containers
+docker ps
+
+# Iniciar um container
+docker start id-container
+
+# Parar um container
+docker stop id-container
+
+# Reiniciar um container
+docker restart id-container
+
+# Remover um container parado
+docker rm id-container
+
+# Verificar logs de um container
+docker logs id-container
+
+# Acessar o terminal de um container em execução
+docker exec -it id-container /bin/bash
+
