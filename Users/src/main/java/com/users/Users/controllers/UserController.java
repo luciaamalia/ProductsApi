@@ -30,13 +30,13 @@ public class UserController {
     @GetMapping
     public ResponseEntity<List<ResponseUserDTO>> listAllUsers(){
         List<ResponseUserDTO> users = userServiceImplementation.getAllUsers();
-        return ResponseEntity.ok(users);
+        return ResponseEntity.status(HttpStatus.OK).body(users);
     }
 
     @GetMapping("/{idUser}")
     public ResponseEntity<ResponseUserDTO> listUserById(@PathVariable UUID idUser){
         ResponseUserDTO user = userServiceImplementation.getUserById(idUser);
-        return ResponseEntity.ok(user);
+        return ResponseEntity.status(HttpStatus.OK).body(user);
     }
 
     @DeleteMapping("/{idUser}")
@@ -58,7 +58,7 @@ public class UserController {
 
         userServiceImplementation.updateUser(dataRequestDTO, userModel);
 
-        return new ResponseEntity<>(userModel, HttpStatus.OK);
+        return ResponseEntity.status(HttpStatus.OK).body(userModel);
     }
 
 }

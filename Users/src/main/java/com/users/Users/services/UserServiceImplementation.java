@@ -2,6 +2,8 @@ package com.users.Users.services;
 
 import com.users.Users.dtos.RequestUserDTO;
 import com.users.Users.dtos.ResponseUserDTO;
+import com.users.Users.exceptions.UserAlreadyExistsException;
+import com.users.Users.exceptions.UserNotFoundException;
 import com.users.Users.models.UserModel;
 import com.users.Users.repositories.UserRepository;
 import com.users.Users.services.interfaces.UserInterface;
@@ -26,6 +28,10 @@ public class UserServiceImplementation implements UserInterface {
     @Override
     public void registerUser(RequestUserDTO requestUserDTO) {
 
+        if(userRepository.existsByName(requestUserDTO.getName())){
+            throw new UserAlreadyExistsException("Esse usuário já existe");
+        }
+
         UserModel userModel = new UserModel();
         BeanUtils.copyProperties(requestUserDTO, userModel);
 
@@ -48,7 +54,7 @@ public class UserServiceImplementation implements UserInterface {
     @Override
     public ResponseUserDTO getUserById(UUID idUser) {
         if (!userRepository.existsById(idUser)){
-           // throw new UserNotFoundException();
+            throw new UserNotFoundException();
         }
         return userRepository.findById(idUser)
                 .map(users -> {
