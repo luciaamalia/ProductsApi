@@ -24,7 +24,7 @@ public class UserModel {
     private UUID idUser;
 
     @Column
-    private String nome;
+    private String name;
 
     @Column
     @Email

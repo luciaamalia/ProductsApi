@@ -9,7 +9,7 @@ import java.util.UUID;
 @Setter
 public class ResponseUserDTO {
     private UUID idUser;
-    private String nome;
+    private String name;
     private String email;
     private TypeUserEnum typeUser;
 }

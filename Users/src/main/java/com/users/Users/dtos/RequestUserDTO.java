@@ -12,7 +12,7 @@ import lombok.Setter;
 public class RequestUserDTO {
 
     @NotBlank(message = "O nome é obrigatório")
-    private String nome;
+    private String name;
 
     @NotBlank(message = "O email é obrigatório")
     @Email(message = "O e-mail deve ser válido.")
