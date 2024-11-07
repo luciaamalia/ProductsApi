@@ -29,7 +29,7 @@ public class UserServiceImplementation implements UserInterface {
     public void registerUser(RequestUserDTO requestUserDTO) {
 
         if(userRepository.existsByName(requestUserDTO.getName())){
-            throw new UserAlreadyExistsException("Esse usuário já existe");
+            throw new UserAlreadyExistsException();
         }
 
         UserModel userModel = new UserModel();

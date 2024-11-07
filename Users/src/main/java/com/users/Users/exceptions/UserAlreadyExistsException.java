@@ -7,15 +7,11 @@ public class UserAlreadyExistsException extends UserGlobalException {
 
     private String detail;
 
-    public UserAlreadyExistsException(String detail){
-        this.detail = detail;
-    }
-
     @Override
     public ProblemDetail toProblemdetail() {
         var problemDetail = ProblemDetail.forStatus(HttpStatus.CONFLICT);
 
-        problemDetail.setDetail(this.detail);
+        problemDetail.setDetail("Esse usuário já existe");
         return problemDetail;
     }
 }
