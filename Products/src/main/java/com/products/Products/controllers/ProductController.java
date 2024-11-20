@@ -31,14 +31,14 @@ public class ProductController {
     @GetMapping
     public ResponseEntity<List<ResponseProductDTO>> ListAllProducts(){
         List<ResponseProductDTO> products = productServiceImplementation.getAllProducts();
-        return ResponseEntity.ok(products);
+        return ResponseEntity.status(HttpStatus.OK).body(products);
 
     }
 
     @GetMapping("/{idProduct}")
     public ResponseEntity<ResponseProductDTO> listProductById(@PathVariable UUID idProduct) {
         ResponseProductDTO product = productServiceImplementation.getProductById(idProduct);
-        return ResponseEntity.ok(product);
+        return ResponseEntity.status(HttpStatus.OK).body(product);
     }
 
     @DeleteMapping("/{idProduct}")

@@ -1,15 +1,19 @@
 package com.users.Users.controllers;
 
+import com.users.Users.dtos.RequestLoginDTO;
 import com.users.Users.dtos.RequestUserDTO;
+import com.users.Users.dtos.ResponseTokenDTO;
 import com.users.Users.dtos.ResponseUserDTO;
 import com.users.Users.models.UserModel;
+import com.users.Users.services.TokenService;
 import com.users.Users.services.UserServiceImplementation;
 import jakarta.validation.Valid;
-import org.apache.coyote.Response;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -21,6 +25,13 @@ public class UserController {
 
     @Autowired
     private UserServiceImplementation userServiceImplementation;
+
+//    @Autowired
+//    private AuthenticationManager manager;
+//
+//    @Autowired
+//    private TokenService tokenService;
+
 
     @PostMapping
     public ResponseEntity<RequestUserDTO> registerUser(@Valid @RequestBody RequestUserDTO userDTO){
@@ -60,5 +71,16 @@ public class UserController {
 
         return ResponseEntity.status(HttpStatus.OK).body(userModel);
     }
+
+//    @PostMapping("/login")
+//    public ResponseEntity login(@RequestBody @Valid RequestLoginDTO data) {
+//        var token = new UsernamePasswordAuthenticationToken(data.getEmail(), data.getPassword());
+//        var authentication = manager.authenticate(token);
+//
+//
+//        var tokenJWT = tokenService.generateToken((UserModel) authentication.getPrincipal());
+//
+//        return ResponseEntity.ok(new ResponseTokenDTO(tokenJWT));
+//    }
 
 }

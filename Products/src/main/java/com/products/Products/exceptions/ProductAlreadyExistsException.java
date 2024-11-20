@@ -7,15 +7,11 @@ public class ProductAlreadyExistsException extends ProductGlobalException {
 
     private String detail;
 
-    public ProductAlreadyExistsException(String detail){
-        this.detail = detail;
-    }
-
     @Override
     public ProblemDetail toProblemdetail() {
         var problemDetail = ProblemDetail.forStatus(HttpStatus.CONFLICT);
 
-        problemDetail.setDetail(this.detail);
+        problemDetail.setDetail("Esse produto já existe");
         return problemDetail;
     }
 }

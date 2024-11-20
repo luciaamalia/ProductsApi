@@ -27,5 +27,4 @@ public class RequestUserDTO {
     @NotBlank(message = "O email é obrigatório")
     private String password;
 
-    //add um telefone aqui
 }

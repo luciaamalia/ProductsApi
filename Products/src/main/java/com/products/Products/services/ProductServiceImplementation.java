@@ -26,8 +26,8 @@ public class ProductServiceImplementation implements ProductInterface {
    @Override
    public void createProduct(RequestProductDTO requestProductDTO){
 
-       if (productRepository.existsByName(requestProductDTO.getName())) {
-           throw new ProductAlreadyExistsException("Esse produto já foi cadastrado");
+       if(productRepository.existsByName(requestProductDTO.getName())){
+           throw new ProductAlreadyExistsException();
        }
 
        ProductModel productModel = new ProductModel();
