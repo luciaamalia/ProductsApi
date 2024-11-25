@@ -7,7 +7,6 @@ import com.users.Users.exceptions.UserNotFoundException;
 import com.users.Users.models.UserModel;
 import com.users.Users.repositories.UserRepository;
 import com.users.Users.services.interfaces.UserInterface;
-import org.apache.catalina.User;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -57,7 +56,7 @@ public class UserServiceImplementation implements UserInterface {
             throw new UserNotFoundException();
         }
         return userRepository.findById(idUser)
-                .map(users -> {
+                .map(users ->        {
                     ResponseUserDTO responseUserDTO = new ResponseUserDTO();
                     BeanUtils.copyProperties(users, responseUserDTO);
                     return responseUserDTO;

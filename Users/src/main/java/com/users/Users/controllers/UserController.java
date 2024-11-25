@@ -26,11 +26,11 @@ public class UserController {
     @Autowired
     private UserServiceImplementation userServiceImplementation;
 
-//    @Autowired
-//    private AuthenticationManager manager;
-//
-//    @Autowired
-//    private TokenService tokenService;
+    @Autowired
+    private AuthenticationManager manager;
+
+    @Autowired
+    private TokenService tokenService;
 
 
     @PostMapping
@@ -72,15 +72,16 @@ public class UserController {
         return ResponseEntity.status(HttpStatus.OK).body(userModel);
     }
 
-//    @PostMapping("/login")
-//    public ResponseEntity login(@RequestBody @Valid RequestLoginDTO data) {
-//        var token = new UsernamePasswordAuthenticationToken(data.getEmail(), data.getPassword());
-//        var authentication = manager.authenticate(token);
-//
-//
-//        var tokenJWT = tokenService.generateToken((UserModel) authentication.getPrincipal());
-//
-//        return ResponseEntity.ok(new ResponseTokenDTO(tokenJWT));
-//    }
+    @PostMapping("/login")
+    public ResponseEntity login(@RequestBody @Valid RequestLoginDTO data) {
+        System.out.println("Token gerado"+ data.login() );
+        var token = new UsernamePasswordAuthenticationToken(data.login(), data.password());
 
+
+
+        var authentication = manager.authenticate(token); //convertendo do dto do spring pro meu
+        var tokenJWT = tokenService.generateToken((UserModel) authentication.getPrincipal());
+
+        return ResponseEntity.ok(new ResponseTokenDTO(tokenJWT));
+    }
 }

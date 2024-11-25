@@ -25,4 +25,4 @@ spring:
 api:
   security:
     token:
-      secret=${JWT_SECRET:12345}:
+      secret: ${JWT_SECRET:12345}
