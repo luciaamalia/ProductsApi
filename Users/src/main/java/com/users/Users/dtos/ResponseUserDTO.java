@@ -13,6 +13,7 @@ public class ResponseUserDTO {
     private UUID idUser;
     private String name;
     private String email;
+    private String login;
     private String phone;
     private String password;
     private TypeUserEnum typeUser;

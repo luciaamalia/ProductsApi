@@ -9,6 +9,7 @@ import com.users.Users.repositories.UserRepository;
 import com.users.Users.services.interfaces.UserInterface;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -24,6 +25,9 @@ public class UserServiceImplementation implements UserInterface {
     @Autowired
     private UserRepository userRepository;
 
+    @Autowired
+    private PasswordEncoder passwordEncoder;
+
     @Override
     public void registerUser(RequestUserDTO requestUserDTO) {
 
@@ -33,6 +37,8 @@ public class UserServiceImplementation implements UserInterface {
 
         UserModel userModel = new UserModel();
         BeanUtils.copyProperties(requestUserDTO, userModel);
+
+        userModel.setPassword(passwordEncoder.encode(requestUserDTO.getPassword()));
 
         userRepository.save(userModel);
     }

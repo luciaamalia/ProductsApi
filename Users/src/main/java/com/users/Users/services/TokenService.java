@@ -16,22 +16,20 @@ public class TokenService {
     @Value("${api.security.token.secret}")
     private String secret;
 
-    public String generateToken(UserModel user){
-        System.out.println("Valor de secret: " + secret);
+    public String token(UserModel user) {
         try {
-            var  algorithm = Algorithm.HMAC256(secret);
+            var  algoritmo = Algorithm.HMAC256(secret);
             return JWT.create()
-                    .withIssuer("User")
+                    .withIssuer("Users")
                     .withSubject(user.getLogin())
-                    .withExpiresAt(dateExpiration())
-                    .sign(algorithm);
+                    .withExpiresAt(dataExpiracao())
+                    .sign(algoritmo);
         } catch (JWTCreationException exception){
-            throw new RuntimeException("Erro ao gerar token jwt", exception);
+            throw new RuntimeException("erro ao gerar token jwt", exception);
         }
     }
 
-    private Instant dateExpiration() {
+    private Instant dataExpiracao() {
         return LocalDateTime.now().plusHours(2).toInstant(ZoneOffset.of("-03:00"));
     }
-
 }

@@ -18,6 +18,7 @@ public class RequestUserDTO {
     @Email(message = "O e-mail deve ser válido.")
     private String email;
 
+    @NotNull(message = "O login não pode estar vazio")
     private String login;
 
     @NotNull(message =  "O tipo de usuário é obrigatório" )
