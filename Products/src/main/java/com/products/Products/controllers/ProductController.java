@@ -9,6 +9,7 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -18,12 +19,14 @@ import java.util.UUID;
 @RestController
 @RequestMapping("/products")
 public class ProductController {
+    @Autowired
+    private KafkaTemplate<String, String> kafkaTemplate;
 
     @Autowired
     private ProductServiceImplementation productServiceImplementation;
 
     @PostMapping
-    public ResponseEntity<RequestProductDTO> registerProduct(@Valid @RequestBody RequestProductDTO productDTO){
+    public ResponseEntity<RequestProductDTO> registerProduct(@Valid @RequestBody RequestProductDTO productDTO,String message){
         productServiceImplementation.createProduct(productDTO);
         return ResponseEntity.status(HttpStatus.CREATED).body(productDTO);
     }
