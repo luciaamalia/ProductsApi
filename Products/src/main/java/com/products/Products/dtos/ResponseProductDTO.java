@@ -1,6 +1,6 @@
 package com.products.Products.dtos;
 
-import com.products.Products.enums.TypeProduct;
+import com.products.Products.enums.TypeProductsEnum;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -15,7 +15,7 @@ public class ResponseProductDTO {
     private String name;
     private String description;
     private BigDecimal price;
-    private TypeProduct typeProduct;
+    private TypeProductsEnum typeProductsEnum;
     private Date dateCreation;
     private Date dateUpdate;
 }

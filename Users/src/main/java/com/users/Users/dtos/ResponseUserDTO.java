@@ -15,7 +15,6 @@ public class ResponseUserDTO {
     private String email;
     private String login;
     private String phone;
-    private String password;
     private TypeUserEnum typeUser;
     private Date dateCreation;
     private Date dateUpdate;

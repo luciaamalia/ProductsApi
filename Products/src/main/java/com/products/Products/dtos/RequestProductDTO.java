@@ -1,6 +1,6 @@
 package com.products.Products.dtos;
 
-import com.products.Products.enums.TypeProduct;
+import com.products.Products.enums.TypeProductsEnum;
 import jakarta.validation.constraints.DecimalMin;
 import jakarta.validation.constraints.NotBlank;
 import lombok.Getter;
@@ -22,6 +22,6 @@ public class RequestProductDTO {
     private BigDecimal price;
 
     @NotNull(message = "O tipo do produto é obrigatório")
-    private TypeProduct typeProduct;
+    private TypeProductsEnum typeProductsEnum;
 
 }

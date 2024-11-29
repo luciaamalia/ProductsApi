@@ -1,11 +1,12 @@
-package com.products.Products.models;
-
-import com.products.Products.enums.TypeProductsEnum;
+package com.users.Users.models;
+import com.users.Users.enums.TypeProductsEnum;
+import com.users.Users.enums.TypeUserEnum;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+
 import java.math.BigDecimal;
 import java.util.Date;
 import java.util.UUID;
@@ -16,7 +17,7 @@ import java.util.UUID;
 @Setter
 @Entity(name = "products")
 @Table(name = "products")
-public class ProductModel {
+public class ProductUserModel {
 
     @Id
     @Column(name = "id_product")
@@ -28,13 +29,17 @@ public class ProductModel {
 
     @Column(name = "type_product")
     @Enumerated(EnumType.STRING)
-    TypeProductsEnum typeProductsEnum;
+    TypeProductsEnum typeProduct;
 
     @Column
     String description;
 
     @Column
     BigDecimal price;
+
+    @ManyToOne
+    @JoinColumn(name = "id_user", nullable = false) // FK apontando para a tabela users
+    private UserModel user;
 
     @Temporal(TemporalType.TIMESTAMP)
     @Column(updatable = false)
@@ -54,5 +59,4 @@ public class ProductModel {
     protected void onUpdate() {
         dateUpdate = new Date();
     }
-
 }

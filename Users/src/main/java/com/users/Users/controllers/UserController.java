@@ -22,12 +22,12 @@ public class UserController {
     private UserServiceImplementation userServiceImplementation;
 
 
-
     @PostMapping
     public ResponseEntity<RequestUserDTO> registerUser(@Valid @RequestBody RequestUserDTO userDTO){
         userServiceImplementation.registerUser(userDTO);
         return ResponseEntity.status(HttpStatus.CREATED).body(userDTO);
     }
+
     @GetMapping
     public ResponseEntity<List<ResponseUserDTO>> listAllUsers(){
         List<ResponseUserDTO> users = userServiceImplementation.getAllUsers();

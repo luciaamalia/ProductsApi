@@ -1,6 +1,6 @@
 package com.products.Products.enums;
 
-public enum TypeProduct {
+public enum TypeProductsEnum {
     ELECTRONICS,
     CLOTHING,
     FOOD,
