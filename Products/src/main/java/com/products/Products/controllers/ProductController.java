@@ -2,6 +2,7 @@ package com.products.Products.controllers;
 
 import com.products.Products.dtos.RequestProductDTO;
 import com.products.Products.dtos.ResponseProductDTO;
+import com.products.Products.exceptions.ProductAlreadyExistsException;
 import com.products.Products.models.ProductModel;
 import com.products.Products.services.ProductServiceImplementation;
 import jakarta.validation.Valid;
@@ -26,9 +27,24 @@ public class ProductController {
     private ProductServiceImplementation productServiceImplementation;
 
     @PostMapping
-    public ResponseEntity<RequestProductDTO> registerProduct(@Valid @RequestBody RequestProductDTO productDTO,String message){
-        productServiceImplementation.createProduct(productDTO);
-        return ResponseEntity.status(HttpStatus.CREATED).body(productDTO);
+    public ResponseEntity<RequestProductDTO> registerProduct(@Valid @RequestBody RequestProductDTO productDTO){
+
+        try{
+            productServiceImplementation.createProduct(productDTO);
+            String message = "Produto criado: " + productDTO.getName();
+            kafkaTemplate.send("products", message);
+
+            return ResponseEntity.status(HttpStatus.CREATED).body(productDTO);
+        } catch (ProductAlreadyExistsException e) {
+            // Trata a exceção se o produto já existir
+            System.out.println("Erro: Produto já existe - " + e.getMessage());
+            return ResponseEntity.status(HttpStatus.CONFLICT).body(null);
+        } catch (Exception e) {
+            // Trata outras exceções que possam ocorrer
+            System.out.println("Erro ao criar produto: " + e.getMessage());
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
+        }
+
     }
 
     @GetMapping
