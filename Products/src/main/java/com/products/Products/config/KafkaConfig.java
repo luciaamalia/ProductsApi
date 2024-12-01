@@ -14,26 +14,26 @@ import java.util.Map;
 
 @Configuration
 public class KafkaConfig {
-
-    @Bean
-    public ConcurrentKafkaListenerContainerFactory<String, String> kafkaFactory() {
-        ConcurrentKafkaListenerContainerFactory<String, String> kafkaFactory = new ConcurrentKafkaListenerContainerFactory<>();
-
-        kafkaFactory.setConsumerFactory(consumer());
-
-        return kafkaFactory;
-    }
-
-    private ConsumerFactory<String, String> consumer() {
-
-        Map<String, Object> props = new HashMap<>();
-        props.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, "localhost:9092");
-        props.put(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class);
-        props.put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class);
-        props.put(ConsumerConfig.AUTO_OFFSET_RESET_CONFIG, "earliest");
-
-        return new DefaultKafkaConsumerFactory<>(props);
-    }
+//
+//    @Bean
+//    public ConcurrentKafkaListenerContainerFactory<String, String> kafkaFactory() {
+//        ConcurrentKafkaListenerContainerFactory<String, String> kafkaFactory = new ConcurrentKafkaListenerContainerFactory<>();
+//
+//        kafkaFactory.setConsumerFactory(consumer());
+//
+//        return kafkaFactory;
+//    }
+//
+//    private ConsumerFactory<String, String> consumer() {
+//
+//        Map<String, Object> props = new HashMap<>();
+//        props.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, "localhost:9092");
+//        props.put(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class);
+//        props.put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class);
+//        props.put(ConsumerConfig.AUTO_OFFSET_RESET_CONFIG, "earliest");
+//
+//        return new DefaultKafkaConsumerFactory<>(props);
+//    }
 
     @Bean
     public KafkaTemplate<String, String> kafkaTemplate(){

@@ -24,6 +24,9 @@ public class ProductServiceImplementation implements ProductInterface {
     @Autowired
     private ProductRepository productRepository;
 
+    @Autowired
+    private KafkaTemplate<String, String> kafkaTemplate;
+
    @Override
    public void createProduct(RequestProductDTO requestProductDTO){
 
@@ -34,6 +37,7 @@ public class ProductServiceImplementation implements ProductInterface {
        ProductModel productModel = new ProductModel();
        BeanUtils.copyProperties(requestProductDTO, productModel);
 
+       kafkaTemplate.send("products", "Lista de Produtos");
        productRepository.save(productModel);
    }
 

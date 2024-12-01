@@ -8,7 +8,6 @@ spring:
       hibernate:
         dialect: org.hibernate.dialect.PostgreSQLDialect
 
-
   datasource:
     url: jdbc:postgresql://localhost:5434/banco_users
     username: pedra
@@ -24,3 +23,12 @@ api:
   security:
     token:
       secret: ${JWT_SECRET:12345}
+
+
+kafka:
+  consumer:
+    bootstrap-servers: localhost:9092
+    group-id: users-group
+    key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+    value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+    auto-offset-reset: earliest
