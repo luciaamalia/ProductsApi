@@ -37,7 +37,9 @@ public class ProductServiceImplementation implements ProductInterface {
        ProductModel productModel = new ProductModel();
        BeanUtils.copyProperties(requestProductDTO, productModel);
 
-       kafkaTemplate.send("products", "Lista de Produtos");
+       // Enviar o RequestProductDTO para o Kafka
+       kafkaTemplate.send("products", requestProductDTO);
+
        productRepository.save(productModel);
    }
 
