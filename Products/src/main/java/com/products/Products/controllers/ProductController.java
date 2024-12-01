@@ -20,8 +20,6 @@ import java.util.UUID;
 @RestController
 @RequestMapping("/products")
 public class ProductController {
-    @Autowired
-    private KafkaTemplate<String, String> kafkaTemplate;
 
     @Autowired
     private ProductServiceImplementation productServiceImplementation;

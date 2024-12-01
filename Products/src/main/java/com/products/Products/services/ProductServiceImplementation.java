@@ -25,7 +25,7 @@ public class ProductServiceImplementation implements ProductInterface {
     private ProductRepository productRepository;
 
     @Autowired
-    private KafkaTemplate<String, String> kafkaTemplate;
+    private KafkaTemplate<String, RequestProductDTO> kafkaTemplate;
 
    @Override
    public void createProduct(RequestProductDTO requestProductDTO){
