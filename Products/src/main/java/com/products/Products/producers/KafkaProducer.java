@@ -13,6 +13,7 @@ public class KafkaProducer {
 
     private final String TOPIC_PRODUCTS = "products";
 
+    //qualquer micro que tiver definido esse topico vai receber a mensagem.
     public void producer(RequestProductDTO product) {
         kafkaTemplate.send(TOPIC_PRODUCTS, product);
     }

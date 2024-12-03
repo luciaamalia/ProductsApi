@@ -62,6 +62,9 @@ public class ProductServiceImplementation implements ProductInterface {
         if (!productRepository.existsById(idProduct)) {
             throw new ProductNotFoundException();
         }
+    // um teste que valida se é buscado um produto pelo id
+        //cenario01 -> sim, busca o produto pelo id
+        //cenario02 -> nao, nao busca o produto pelo id e retorna exception
 
         return productRepository.findById(idProduct)
                 .map(products -> {
