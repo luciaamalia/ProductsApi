@@ -1,5 +1,7 @@
 package com.products.Products.services;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.products.Products.dtos.RequestProductDTO;
 import com.products.Products.dtos.ResponseProductDTO;
 import com.products.Products.exceptions.ProductAlreadyExistsException;
@@ -25,10 +27,10 @@ public class ProductServiceImplementation implements ProductInterface {
     private ProductRepository productRepository;
 
     @Autowired
-    private KafkaTemplate<String, RequestProductDTO> kafkaTemplate;
+    private KafkaTemplate<String, String> kafkaTemplate;
 
    @Override
-   public void createProduct(RequestProductDTO requestProductDTO){
+   public void createProduct(RequestProductDTO requestProductDTO) {
 
        if(productRepository.existsByName(requestProductDTO.getName())){
            throw new ProductAlreadyExistsException();
@@ -37,10 +39,18 @@ public class ProductServiceImplementation implements ProductInterface {
        ProductModel productModel = new ProductModel();
        BeanUtils.copyProperties(requestProductDTO, productModel);
 
-       // Enviar o RequestProductDTO para o Kafka
-       kafkaTemplate.send("products", requestProductDTO);
-
        productRepository.save(productModel);
+
+       ObjectMapper objectMapper = new ObjectMapper();
+       String eventProduct = null;
+       try {
+           eventProduct = objectMapper.writeValueAsString(productModel);
+       } catch (JsonProcessingException e) {
+           throw new RuntimeException(e);
+       }
+
+       kafkaTemplate.send("products", eventProduct);
+
    }
 
     @Override
@@ -88,6 +98,5 @@ public class ProductServiceImplementation implements ProductInterface {
 
         productRepository.save(productModel);
     }
-
 
 }

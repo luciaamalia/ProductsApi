@@ -3,9 +3,7 @@ package com.products.Products.services.interfaces;
 import com.products.Products.dtos.RequestProductDTO;
 import com.products.Products.dtos.ResponseProductDTO;
 import com.products.Products.models.ProductModel;
-
 import java.util.List;
-import java.util.Optional;
 import java.util.UUID;
 
 public interface ProductInterface {

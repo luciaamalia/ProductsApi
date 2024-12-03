@@ -1,6 +1,5 @@
 package com.users.Users.models;
 import com.users.Users.enums.TypeProductsEnum;
-import com.users.Users.enums.TypeUserEnum;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -17,7 +16,7 @@ import java.util.UUID;
 @Setter
 @Entity(name = "products")
 @Table(name = "products")
-public class ProductUserModel {
+public class UserProductModel {
 
     @Id
     @Column(name = "id_product")

@@ -55,4 +55,13 @@ public class ProductModel {
         dateUpdate = new Date();
     }
 
+    @Override
+    public String toString() {
+        return "ProductModel{" +
+                "name='" + name + '\'' +
+                ", price=" + price +
+                ", description='" + description + '\'' +
+                '}';
+    }
+
 }

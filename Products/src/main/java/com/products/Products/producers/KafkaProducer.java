@@ -9,12 +9,12 @@ import org.springframework.stereotype.Service;
 public class KafkaProducer {
 
     @Autowired
-    private KafkaTemplate<String, RequestProductDTO> kafkaTemplate;
+    private KafkaTemplate<String, String> kafkaTemplate;
 
     private final String TOPIC_PRODUCTS = "products";
 
     //qualquer micro que tiver definido esse topico vai receber a mensagem.
-    public void producer(RequestProductDTO product) {
+    public void producer(String product) {
         kafkaTemplate.send(TOPIC_PRODUCTS, product);
     }
 }

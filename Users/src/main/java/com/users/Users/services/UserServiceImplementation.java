@@ -5,6 +5,7 @@ import com.users.Users.dtos.ResponseUserDTO;
 import com.users.Users.exceptions.UserAlreadyExistsException;
 import com.users.Users.exceptions.UserNotFoundException;
 import com.users.Users.models.UserModel;
+import com.users.Users.repositories.UserProductRepository;
 import com.users.Users.repositories.UserRepository;
 import com.users.Users.services.interfaces.UserInterface;
 import org.springframework.beans.BeanUtils;
