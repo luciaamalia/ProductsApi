@@ -1,11 +1,11 @@
 
 # AmaStore Backend
 
-Bem-vindo ao projeto **AmaStore**, o backend de um e-commerce desenvolvido para fornecer uma experiência robusta e escalável, utilizando uma arquitetura de microserviços.
+Bem-vindo ao projeto **AmaStore**, o backend de um e-commerce desenvolvido para fornecer uma experiência robusta e escalável, utilizando uma arquitetura de microsserviços.
 
 ## Visão Geral
 
-**AmaStore** é uma API backend para um e-commerce, construída com **Java** e **Spring Framework**. Este projeto emprega **microserviços** para gerenciar diferentes partes do sistema, proporcionando flexibilidade, independência de desenvolvimento e facilidade de escalabilidade.
+**AmaStore** é uma API backend para um e-commerce, construída com **Java** e **Spring Framework**. Este projeto emprega **microsserviços** para gerenciar diferentes partes do sistema, proporcionando flexibilidade, independência de desenvolvimento e facilidade de escalabilidade.
 
 ## Tecnologias Utilizadas
 
